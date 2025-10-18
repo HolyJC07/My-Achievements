@@ -1,128 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: #111;
-            color: #fff;
-            text-align: center;
-            line-height: 1.6;
-        }
-        h1 {
-            font-size: 4rem;
-            color: #00f1ff;
-            margin-top: 50px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-        header {
-            background: #1a1a2e;
-            padding: 50px 0;
-            box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
-        }
-        .intro {
-            margin: 20px 0;
-            font-size: 1.5rem;
-            color: #bbb;
-        }
-        .section {
-            padding: 100px 0;
-            background: #16213e;
-            margin-top: 50px;
-        }
-        .projects {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 50px;
-        }
-        .project {
-            background: #222;
-            width: 250px;
-            height: 300px;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            transition: transform 0.3s ease;
-        }
-        .project:hover {
-            transform: scale(1.05);
-        }
-        .project img {
-            width: 100%;
-            height: 60%;
-            border-radius: 10px 10px 0 0;
-            object-fit: cover;
-        }
-        .project h3 {
-            margin-top: 20px;
-            font-size: 1.2rem;
-            color: #00f1ff;
-        }
-        footer {
-            background: #1a1a2e;
-            color: #888;
-            padding: 30px 0;
-            font-size: 1rem;
-        }
-        .socials {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        .socials a {
-            color: #888;
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        .socials a:hover {
-            color: #00f1ff;
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Sci-Fi Portfolio</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0f15; --panel:#101826; --muted:#9aa4b2; --text:#e6f0ff;
+  --neon:#00f1ff; --neon-2:#8a5cff; --accent:#00d4a6;
+  --card:#111a2a; --glass:rgba(255,255,255,.06); --border:rgba(255,255,255,.12);
+}
+:root.light{
+  --bg:#f6f8fb; --panel:#ffffff; --muted:#5b6673; --text:#0b1220;
+  --card:#f7f9fc; --glass:rgba(0,0,0,.03); --border:rgba(0,0,0,.08);
+  --neon:#0aa6ff; --neon-2:#7a49ff; --accent:#12c48b;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  line-height:1.6; overflow-x:hidden;
+}
+a{color:var(--neon); text-decoration:none}
+a:hover{opacity:.9}
+.container{max-width:1100px; margin:auto; padding:0 24px}
+
+canvas#stars{position:fixed; inset:0; z-index:-1; background:radial-gradient(1100px 600px at 70% -10%, rgba(0,241,255,.18), transparent 60%), radial-gradient(900px 500px at 20% -10%, rgba(138,92,255,.12), transparent 55%)}
+
+/* Navbar */
+nav{
+  position:sticky; top:0; z-index:10; backdrop-filter:blur(8px);
+  background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.15));
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 0}
+.brand{display:flex; align-items:center; gap:10px; font-family:Orbitron,sans-serif; letter-spacing:.5px; font-weight:800}
+.brand .dot{width:10px;height:10px;border-radius:50%;background:var(--neon); box-shadow:0 0 12px var(--neon)}
+nav ul{display:flex; gap:18px; list-style:none; padding:0;margin:0}
+nav a{color:var(--text); opacity:.85; font-weight:600}
+nav a.active{color:var(--neon)}
+.toggle{
+  border:1px solid var(--border); background:var(--glass); color:var(--text);
+  padding:6px 12px; border-radius:999px; cursor:pointer; font-weight:600
+}
+
+/* Hero */
+.hero{padding:84px 0 56px}
+h1{
+  font-family:Orbitron,sans-serif; font-size:clamp(32px,5vw,56px);
+  letter-spacing:2px; margin:0 0 12px;
+  text-shadow:0 0 20px rgba(0,241,255,.35);
+}
+.sub{color:var(--muted); font-size:clamp(14px,2.8vw,18px)}
+.badges{display:flex; gap:10px; flex-wrap:wrap; margin-top:18px}
+.badge{
+  border:1px solid var(--border); padding:6px 10px; border-radius:999px;
+  background:var(--glass); color:var(--muted); font-weight:600; font-size:.92rem
+}
+
+/* Section */
+.section{padding:68px 0}
+.section h2{
+  font-family:Orbitron,sans-serif; letter-spacing:1px;
+  font-size:clamp(22px,4vw,28px); margin:0 0 18px
+}
+.section .lead{color:var(--muted); margin:0 0 22px}
+
+/* Projects */
+.controls{display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin:18px 0 10px}
+input[type="search"]{
+  flex:1 1 220px; padding:10px 12px; border-radius:10px; border:1px solid var(--border);
+  background:var(--panel); color:var(--text); outline:none
+}
+.filter{padding:8px 12px; border:1px solid var(--border); background:var(--panel); border-radius:999px; color:var(--text); cursor:pointer}
+.filter.active{border-color:var(--neon); box-shadow:0 0 0 2px rgba(0,241,255,.15)}
+
+.grid{display:grid; grid-template-columns:repeat( auto-fit, minmax(240px,1fr) ); gap:18px; margin-top:16px}
+.card{
+  background:linear-gradient(180deg,var(--panel),var(--card));
+  border:1px solid var(--border); border-radius:16px; overflow:hidden; transform:translateY(8px);
+  box-shadow:0 8px 30px rgba(0,0,0,.25); transition:.25s ease; opacity:0
+}
+.card.show{transform:translateY(0); opacity:1}
+.thumb{aspect-ratio:16/10; width:100%; object-fit:cover; display:block; background:#000}
+.card .body{padding:14px 14px 16px}
+.card h3{margin:0 0 6px; font-size:1.05rem}
+.tags{display:flex; flex-wrap:wrap; gap:6px}
+.tag{font-size:.75rem; border:1px solid var(--border); color:var(--muted); padding:3px 8px; border-radius:999px}
+.card:hover{transform:translateY(-4px); box-shadow:0 14px 36px rgba(0,0,0,.35)}
+.card .cta{margin-top:10px; display:flex; gap:10px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  padding:8px 12px; border-radius:10px; border:1px solid var(--border);
+  background:var(--panel); color:var(--text); font-weight:600; cursor:pointer
+}
+.btn.neon{background:linear-gradient(90deg,var(--neon),var(--neon-2)); color:#001018; border:none}
+
+/* Skills */
+.skills{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:16px}
+.skill{background:var(--panel); border:1px solid var(--border); border-radius:14px; padding:14px}
+.skill .row{display:flex; align-items:center; justify-content:space-between}
+.bar{margin-top:8px; height:10px; border-radius:999px; background:linear-gradient(90deg, var(--glass), transparent)}
+.fill{height:10px; border-radius:999px; width:0; background:linear-gradient(90deg,var(--neon),var(--neon-2))}
+.num{font-weight:800; font-family:Orbitron,monospace}
+
+/* Modal */
+.modal{
+  position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.6); padding:24px; z-index:20
+}
+.modal.open{display:flex}
+.modal-card{
+  max-width:860px; width:100%; background:var(--panel); border:1px solid var(--border); border-radius:18px; overflow:hidden
+}
+.modal-head{display:flex; align-items:center; justify-content:space-between; padding:12px 16px; border-bottom:1px solid var(--border)}
+.modal-body{display:grid; grid-template-columns: 1.2fr 1fr; gap:12px; padding:12px}
+.modal img{width:100%; border-radius:12px}
+.close{cursor:pointer; font-weight:800}
+
+/* Footer */
+footer{border-top:1px solid var(--border); background:linear-gradient(180deg,var(--panel),transparent); padding:26px 0; color:var(--muted)}
+.socials{display:flex; gap:14px; justify-content:center}
+
+/* Floating */
+#topBtn{
+  position:fixed; right:18px; bottom:18px; z-index:9; padding:10px 12px;
+  background:var(--panel); color:var(--text); border:1px solid var(--border); border-radius:12px; display:none
+}
+#topBtn.show{display:block}
+
+/* Responsive modal */
+@media (max-width:820px){ .modal-body{grid-template-columns:1fr} }
+</style>
 </head>
 <body>
 
-<header>
-    <h1>My Sci-Fi Portfolio</h1>
-    <p class="intro">Welcome to my futuristic portfolio where I showcase my creative projects and digital artworks.</p>
+<canvas id="stars"></canvas>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="brand"><span class="dot"></span> MY PORTFOLIO</div>
+    <ul id="navLinks">
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="toggle" id="themeBtn">Toggle Theme</button>
+  </div>
+</nav>
+
+<header id="home" class="hero container">
+  <h1>My Sci-Fi Portfolio</h1>
+  <p class="sub">A futuristic showcase of my projects, experiments and ideas.</p>
+  <div class="badges">
+    <span class="badge">Front-end</span>
+    <span class="badge">Cyber UI</span>
+    <span class="badge">Security</span>
+    <span class="badge">Automation</span>
+  </div>
 </header>
 
-<section class="section">
-    <h2>My Projects</h2>
-    <div class="projects">
-        <div class="project">
-            <img src="https://via.placeholder.com/250x150" alt="Project 1">
-            <h3>Project One</h3>
-        </div>
-        <div class="project">
-            <img src="https://via.placeholder.com/250x150" alt="Project 2">
-            <h3>Project Two</h3>
-        </div>
-        <div class="project">
-            <img src="https://via.placeholder.com/250x150" alt="Project 3">
-            <h3>Project Three</h3>
-        </div>
-    </div>
+<section id="projects" class="section container">
+  <h2>Projects</h2>
+  <p class="lead">Filter and explore – click any card for details.</p>
+
+  <div class="controls">
+    <input id="search" type="search" placeholder="Search projects..." />
+    <button class="filter active" data-cat="all">All</button>
+    <button class="filter" data-cat="web">Web</button>
+    <button class="filter" data-cat="security">Security</button>
+    <button class="filter" data-cat="ai">AI</button>
+  </div>
+
+  <div class="grid" id="grid">
+    <!-- cards will be injected by JS -->
+  </div>
+</section>
+
+<section id="skills" class="section container">
+  <h2>Skills</h2>
+  <p class="lead">Auto-animating progress with neon bars.</p>
+  <div class="skills" id="skillsBox">
+    <!-- skills injected by JS -->
+  </div>
+</section>
+
+<section id="contact" class="section container">
+  <h2>Contact</h2>
+  <p class="lead">Have an idea or a mission? Let’s talk.</p>
+  <p>Email: <a id="mail" href="mailto:bulk2182@gmail.com">bulk2182@gmail.com</a></p>
+  <div class="socials">
+    <a href="https://github.com/HolyJC07" target="_blank">GitHub</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="#" onclick="copyMail();return false;">Copy email</a>
+  </div>
 </section>
 
 <footer>
-    <p>&copy; 2025 My Portfolio. All Rights Reserved.</p>
-    <div class="socials">
-        <a href="https://twitter.com" target="_blank">Twitter</a>
-        <a href="https://linkedin.com" target="_blank">LinkedIn</a>
-        <a href="https://github.com" target="_blank">GitHub</a>
-    </div>
+  <div class="container">© <span id="year"></span> My-Achievements. Built with ❤ and neon.</div>
 </footer>
 
+<button id="topBtn">↑ Top</button>
+
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-card">
+    <div class="modal-head">
+      <strong id="mTitle">Title</strong>
+      <span class="close" id="mClose">✕</span>
+    </div>
+    <div class="modal-body">
+      <img id="mImg" alt="preview">
+      <div>
+        <p id="mDesc" style="margin-top:0"></p>
+        <div class="tags" id="mTags"></div>
+        <div class="cta" id="mLinks"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---------- Theme ----------
+const applyTheme = (t)=>{document.documentElement.classList.toggle('light', t==='light'); localStorage.setItem('theme', t);}
+const themeBtn = document.getElementById('themeBtn');
+const initTheme = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');
+applyTheme(initTheme);
+themeBtn.onclick = ()=> applyTheme(document.documentElement.classList.contains('light')?'dark':'light');
+addEventListener('keydown', e=>{ if(e.key==='t') themeBtn.click(); });
+
+// ---------- Stars Canvas ----------
+const cvs = document.getElementById('stars'), ctx = cvs.getContext('2d');
+let stars=[]; const S=140; function resize(){cvs.width=innerWidth; cvs.height=innerHeight;}
+function initStars(){stars = Array.from({length:S}, ()=>({x:Math.random()*cvs.width, y:Math.random()*cvs.height, r:Math.random()*1.5+0.4, v:Math.random()*0.4+0.1}))}
+function draw(){ctx.clearRect(0,0,cvs.width,cvs.height); ctx.fillStyle='rgba(255,255,255,.85)'; for(const s of stars){ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.y+=s.v; if(s.y>cvs.height) s.y=-5;}}
+function loop(){draw(); requestAnimationFrame(loop)}
+addEventListener('resize', ()=>{resize(); initStars();});
+resize(); initStars(); loop();
+
+// ---------- Nav active + smooth scroll ----------
+const navLinks=[...document.querySelectorAll('#navLinks a')];
+navLinks.forEach(a=>a.addEventListener('click', e=>{
+  e.preventDefault(); document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
+}));
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      const id = '#'+en.target.id;
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===id));
+    }
+  });
+},{rootMargin:'-50% 0px -45% 0px'});
+['home','projects','skills','contact'].forEach(id=>io.observe(document.getElementById(id)));
+
+// ---------- Back to top ----------
+const topBtn = document.getElementById('topBtn');
+addEventListener('scroll', ()=> topBtn.classList.toggle('show', scrollY>800));
+topBtn.onclick = ()=> scrollTo({top:0, behavior:'smooth'});
+
+// ---------- Data (projects & skills) ----------
+const projects = [
+  {title:'Neon UI System', cat:'web', img:'https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop', 
+   desc:'A component kit with glassmorphism and cyber accents.', tags:['UI','Design'], links:[{label:'Live',url:'#'},{label:'Code',url:'https://github.com/'}]},
+  {title:'CTF Toolkit', cat:'security', img:'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop',
+   desc:'Handy scripts and payload helpers for blue/red team practice.', tags:['Python','Ops'], links:[{label:'Docs',url:'#'}]},
+  {title:'Vision Agent', cat:'ai', img:'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1000&auto=format&fit=crop',
+   desc:'Tiny agent that analyzes frames and triggers actions.', tags:['AI','Edge'], links:[{label:'Code',url:'#'}]},
+  {title:'Static Site Engine', cat:'web', img:'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1000&auto=format&fit=crop',
+   desc:'Markdown → pages with zero build tools.', tags:['JS'], links:[{label:'Demo',url:'#'}]},
+];
+const skills = [
+  {name:'HTML/CSS', val:92}, {name:'JavaScript', val:86},
+  {name:'Security', val:78}, {name:'Automation', val:74},
+  {name:'UI/UX', val:80}
+];
+
+// ---------- Render projects ----------
+const grid = document.getElementById('grid');
+function cardTemplate(p,i){return `
+  <article class="card show" data-cat="${p.cat}" data-index="${i}">
+    <img class="thumb" src="${p.img}" alt="${p.title}">
+    <div class="body">
+      <h3>${p.title}</h3>
+      <div class="tags">${p.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+      <div class="cta"><button class="btn neon" data-open="${i}">Open</button></div>
+    </div>
+  </article>`}
+grid.innerHTML = projects.map(cardTemplate).join('');
+// appear animation
+[...grid.children].forEach((el,idx)=>{el.style.transitionDelay = (idx*40)+'ms'; el.classList.add('show')});
+
+// ---------- Search & filters ----------
+const search = document.getElementById('search');
+const filterBtns=[...document.querySelectorAll('.filter')];
+function applyFilter(){
+  const q = search.value.trim().toLowerCase();
+  const cat = filterBtns.find(b=>b.classList.contains('active')).dataset.cat;
+  [...grid.children].forEach(card=>{
+    const p = projects[+card.dataset.index];
+    const okCat = (cat==='all' || p.cat===cat);
+    const okText = (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
+    card.style.display = (okCat && okText) ? '' : 'none';
+  });
+}
+search.addEventListener('input', applyFilter);
+filterBtns.forEach(b=>b.addEventListener('click', ()=>{filterBtns.forEach(x=>x.classList.remove('active')); b.classList.add('active'); applyFilter();}));
+
+// ---------- Modal ----------
+const modal = document.getElementById('modal'), mImg = document.getElementById('mImg'),
+      mTitle = document.getElementById('mTitle'), mDesc = document.getElementById('mDesc'),
+      mTags = document.getElementById('mTags'), mLinks = document.getElementById('mLinks');
+grid.addEventListener('click', e=>{
+  const idx = e.target.dataset.open;
+  if(idx===undefined) return;
+  const p = projects[+idx];
+  mImg.src = p.img; mImg.alt = p.title; mTitle.textContent = p.title; mDesc.textContent = p.desc;
+  mTags.innerHTML = p.tags.map(t=>`<span class="tag">${t}</span>`).join('');
+  mLinks.innerHTML = p.links.map(l=>`<a class="btn" target="_blank" href="${l.url}">${l.label}</a>`).join('');
+  modal.classList.add('open');
+});
+document.getElementById('mClose').onclick = ()=> modal.classList.remove('open');
+modal.addEventListener('click', e=>{ if(e.target===modal) modal.classList.remove('open');});
+
+// ---------- Skills ----------
+const box = document.getElementById('skillsBox');
+box.innerHTML = skills.map(s=>`
+  <div class="skill reveal">
+    <div class="row"><strong>${s.name}</strong><span class="num" data-v="${s.val}">0%</span></div>
+    <div class="bar"><div class="fill"></div></div>
+  </div>`).join('');
+const skillObs = new IntersectionObserver(entries=>{
+  entries.forEach(en=>{
+    if(!en.isIntersecting) return;
+    const n = en.target.querySelector('.num');
+    const fill = en.target.querySelector('.fill');
+    const to = +n.dataset.v; let cur=0;
+    const step = ()=>{cur = Math.min(to, cur+2); n.textContent = cur+'%'; fill.style.width = cur+'%'; if(cur<to) requestAnimationFrame(step);}
+    step(); skillObs.unobserve(en.target);
+  });
+},{threshold:.4});
+[...document.querySelectorAll('.skill')].forEach(el=>skillObs.observe(el));
+
+// ---------- Utilities ----------
+document.getElementById('year').textContent = new Date().getFullYear();
+function copyMail(){ navigator.clipboard.writeText(document.getElementById('mail').textContent); alert('Email copied!'); }
+
+// ---------- Reveal on scroll ----------
+const revealObs = new IntersectionObserver(es=>{ es.forEach(e=> e.target.classList.add('show')) }, {threshold:.1});
+[...document.querySelectorAll('.card')].forEach(el=>revealObs.observe(el));
+</script>
 </body>
 </html>
